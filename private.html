@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share Your Feedback | Jendi Tralee Styling</title>
+<meta name="description" content="Private feedback for Jendi Tralee Styling, Christchurch personal stylist.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231a1512'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='54' fill='%23b0824d' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="review-wrap">
+  <div class="review-card">
+    <div id="formView">
+      <span class="eyebrow">We're listening</span>
+      <h1>Tell us how we can do better</h1>
+      <p>Thanks for being honest — your feedback goes straight to Jendi and helps us improve. It won't be posted publicly.</p>
+      <form action="https://formsubmit.co/jenditralee@gmail.com" method="POST" id="pform" style="text-align:left">
+        <input type="hidden" name="_subject" value="Private feedback — Jendi Tralee Styling">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" id="nextField" value="">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@email.com" required>
+        </div>
+        <div class="field">
+          <label for="rating">Your rating</label>
+          <input id="rating" name="rating" type="text" readonly>
+        </div>
+        <div class="field">
+          <label for="feedback">What could we have done better?</label>
+          <textarea id="feedback" name="feedback" placeholder="Tell us what happened and how we can improve..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Feedback</button>
+        <p class="form__note">Private — only Jendi will see this.</p>
+      </form>
+      <p style="margin-top:22px"><a href="index.html" style="font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">← Back to site</a></p>
+    </div>
+
+    <div class="success" id="successView">
+      <div class="success__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></div>
+      <h1>Thank you</h1>
+      <p>We really appreciate you taking the time. Your feedback has been sent to Jendi and we'll use it to keep improving.</p>
+      <a href="index.html" class="btn btn-primary">Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  var params = new URLSearchParams(window.location.search);
+  var rating = params.get('rating') || '';
+  var stars = rating ? ('★★★★★☆☆☆☆☆'.slice(5 - rating, 10 - rating)) : '';
+  var ratingField = document.getElementById('rating');
+  ratingField.value = rating ? (rating + ' / 5  ' + '★'.repeat(rating)) : 'Not specified';
+  // success redirect target for FormSubmit
+  document.getElementById('nextField').value = window.location.href.split('?')[0] + '?sent=1';
+
+  if (params.get('sent') === '1') {
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('successView').classList.add('show');
+  }
+</script>
+</body>
+</html>
